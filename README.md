@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Locobotics AI website
 
-## Getting Started
+A responsive, futuristic, dependency-free website for Locobotics AI.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Install Node.js 20 or newer.
+2. Open a terminal in this folder.
+3. Run `npm install`.
+4. Run `npm run dev`.
+5. Open the local URL shown in the terminal.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project has no third-party runtime or build dependencies. You can also open `index.html` directly for a quick preview.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run `npm run build`. The deployable site will be created in the `dist` folder.
 
-## Learn More
+## Deploy to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+Push this folder to GitHub and import the repository in Vercel. The included configuration uses `npm run build` and publishes the `dist` directory automatically.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Main files
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `index.html` — content and page structure
+- `styles.css` — responsive visual design and animation
+- `script.js` — menu, reveal motion and pointer effects
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Before launch, confirm the public contact email in `index.html` and replace it if needed.
