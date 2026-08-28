@@ -4,7 +4,19 @@ import path from 'node:path';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const output = path.join(root, 'dist');
-const files = ['index.html', 'styles.css', 'script.js', 'favicon.svg'];
+const files = [
+  'index.html',
+  'relayvo.html',
+  'privacy.html',
+  'terms.html',
+  'styles.css',
+  'script.js',
+  'favicon.svg',
+  'logo-512.png',
+  'og-image.png',
+  'robots.txt',
+  'sitemap.xml',
+];
 
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });

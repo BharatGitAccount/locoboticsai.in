@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#b8ff4f" stop-opacity=".35"/>
+      <stop offset=".45" stop-color="#59e9ff" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#05070b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" x2="1">
+      <stop stop-color="#b8ff4f"/>
+      <stop offset=".55" stop-color="#59e9ff"/>
+      <stop offset="1" stop-color="#9867ff"/>
+    </linearGradient>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M 52 0 L 0 0 0 52" fill="none" stroke="#ffffff" stroke-opacity=".055"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#05070b"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="920" cy="315" r="295" fill="url(#orb)"/>
+  <circle cx="920" cy="315" r="180" fill="none" stroke="#ffffff" stroke-opacity=".16"/>
+  <circle cx="920" cy="315" r="218" fill="none" stroke="#b8ff4f" stroke-opacity=".2" stroke-dasharray="5 10"/>
+  <circle cx="920" cy="315" r="116" fill="#090d12" stroke="#59e9ff" stroke-opacity=".4"/>
+  <path d="M820 315h200" stroke="url(#line)" stroke-width="2" opacity=".75"/>
+  <circle cx="820" cy="315" r="7" fill="#b8ff4f"/>
+  <circle cx="1020" cy="315" r="7" fill="#9867ff"/>
+  <text x="920" y="332" text-anchor="middle" fill="#f4f7f2" font-family="Arial, sans-serif" font-size="58" font-weight="600">AI</text>
+  <g transform="translate(74 72)">
+    <circle cx="18" cy="18" r="17" fill="none" stroke="#ffffff" stroke-opacity=".35"/>
+    <circle cx="18" cy="18" r="9" fill="none" stroke="#b8ff4f"/>
+    <circle cx="18" cy="2" r="2.5" fill="#f4f7f2"/>
+    <circle cx="32" cy="27" r="2.5" fill="#f4f7f2"/>
+    <circle cx="4" cy="27" r="2.5" fill="#f4f7f2"/>
+    <text x="52" y="23" fill="#f4f7f2" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="2">LOCOBOTICS</text>
+    <rect x="197" y="4" width="30" height="23" rx="2" fill="none" stroke="#b8ff4f" stroke-opacity=".65"/>
+    <text x="212" y="20" text-anchor="middle" fill="#b8ff4f" font-family="Arial, sans-serif" font-size="12">AI</text>
+  </g>
+  <text x="74" y="245" fill="#f4f7f2" font-family="Arial, sans-serif" font-size="68" font-weight="500" letter-spacing="-3">AI transformation</text>
+  <text x="74" y="320" fill="#f4f7f2" font-family="Arial, sans-serif" font-size="68" font-weight="500" letter-spacing="-3">products.</text>
+  <rect x="74" y="365" width="390" height="3" fill="url(#line)"/>
+  <text x="74" y="423" fill="#9aa3ad" font-family="Arial, sans-serif" font-size="25">Built for enterprise workflows.</text>
+  <text x="74" y="540" fill="#b8ff4f" font-family="Courier New, monospace" font-size="17" letter-spacing="2">FLAGSHIP PRODUCT · RELAYVO</text>
+</svg>

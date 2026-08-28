@@ -23,7 +23,11 @@ Push this folder to GitHub and import the repository in Vercel. The included con
 ## Main files
 
 - `index.html` — content and page structure
+- `privacy.html` and `terms.html` — website legal pages
 - `styles.css` — responsive visual design and animation
 - `script.js` — menu, reveal motion and pointer effects
+- `robots.txt` and `sitemap.xml` — search-engine crawl controls
+- `og-image.png` — social sharing image
+- `logo-512.png` — structured-data organization logo
 
 Before launch, confirm the public contact email in `index.html` and replace it if needed.
