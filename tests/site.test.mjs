@@ -107,3 +107,14 @@ test('production build includes every SEO asset', () => {
   assert.equal(logo.readUInt32BE(16), 512);
   assert.equal(logo.readUInt32BE(20), 512);
 });
+
+test('all workflow CTAs open the enquiry form instead of an email client', () => {
+  assert.doesNotMatch(html, /mailto:[^"']*Design/);
+  assert.doesNotMatch(relayvo, /mailto:/);
+  assert.equal((relayvo.match(/data-inquiry-open/g) ?? []).length, 3);
+  assert.equal((html.match(/data-inquiry-open/g) ?? []).length, 1);
+  assert.match(script, /id="inquiry-form"/);
+  assert.match(script, /fetch\('\/api\/inquiry'/);
+  assert.match(script, /aria-live="polite"/);
+  assert.match(vercel, /connect-src 'self'/);
+});
