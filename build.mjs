@@ -11,6 +11,7 @@ const files = [
   'terms.html',
   'styles.css',
   'script.js',
+  'analytics.js',
   'favicon.svg',
   'logo-512.png',
   'og-image.png',
