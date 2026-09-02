@@ -58,6 +58,12 @@ if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
   }, { passive: true });
 }
 
+document.querySelectorAll('a[href="/relayvo"]').forEach((link) => {
+  link.addEventListener('click', () => window.trackAnalyticsEvent?.('relayvo_explore', {
+    source_path: window.location.pathname,
+  }));
+});
+
 const inquiryTriggers = [...document.querySelectorAll('[data-inquiry-open]')];
 
 if (inquiryTriggers.length) {
@@ -121,6 +127,9 @@ if (inquiryTriggers.length) {
     returnFocus = trigger;
     status.textContent = '';
     status.className = 'inquiry-status';
+    window.trackAnalyticsEvent?.('relayvo_inquiry_open', {
+      page_path: window.location.pathname,
+    });
     document.body.classList.add('modal-open');
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
@@ -167,6 +176,9 @@ if (inquiryTriggers.length) {
       form.reset();
       status.textContent = 'Thank you. Your workflow enquiry has been sent to our team.';
       status.classList.add('success');
+      window.trackAnalyticsEvent?.('relayvo_inquiry_submit', {
+        page_path: window.location.pathname,
+      });
     } catch (error) {
       status.textContent = error.name === 'AbortError'
         ? 'The request timed out. Please try again.'
