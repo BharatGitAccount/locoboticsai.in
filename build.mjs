@@ -7,6 +7,8 @@ const output = path.join(root, 'dist');
 const files = [
   'index.html',
   'relayvo.html',
+  'whatsapp-orchestration-vs-chatbot.html',
+  'relayvo-customer-onboarding.html',
   'privacy.html',
   'terms.html',
   'styles.css',
