@@ -3,9 +3,11 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const [html, relayvo, privacy, terms, css, script, robots, sitemap, build, vercel, ogImage, logo] = await Promise.all([
+const [html, relayvo, comparison, onboarding, privacy, terms, css, script, robots, sitemap, build, vercel, ogImage, logo] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../relayvo.html', import.meta.url), 'utf8'),
+  readFile(new URL('../whatsapp-orchestration-vs-chatbot.html', import.meta.url), 'utf8'),
+  readFile(new URL('../relayvo-customer-onboarding.html', import.meta.url), 'utf8'),
   readFile(new URL('../privacy.html', import.meta.url), 'utf8'),
   readFile(new URL('../terms.html', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
@@ -46,11 +48,14 @@ test('enhancements have failure-safe behavior', () => {
   assert.match(script, /setTimeout\(showEverything/);
 });
 
-test('site has production metadata and no external runtime dependency', () => {
+test('site has production metadata and only the approved analytics runtime', () => {
   assert.match(html, /<meta name="description"/);
   assert.match(html, /<meta name="viewport"/);
   assert.match(html, /<title>Locobotics AI/);
-  assert.doesNotMatch(html, /<script[^>]+src=["']https?:\/\//);
+  assert.deepEqual(
+    html.match(/<script[^>]+src=["']https?:\/\/[^"']+["'][^>]*>/g) ?? [],
+    ['<script async src="https://www.googletagmanager.com/gtag/js?id=G-8756JVKPNY">'],
+  );
   assert.doesNotMatch(html, /<link[^>]+(?:stylesheet|icon)[^>]+href=["']https?:\/\//);
 });
 
@@ -82,10 +87,34 @@ test('Relayvo page has unique indexable product SEO', () => {
   assert.match(vercel, new RegExp(`sha256-${cspHash.replace(/[+/?=]/g, '\\$&')}`));
 });
 
+test('Relayvo comparison and onboarding pages are indexable, linked and structured', () => {
+  for (const [page, canonical] of [
+    [comparison, 'whatsapp-orchestration-vs-chatbot'],
+    [onboarding, 'relayvo-customer-onboarding'],
+  ]) {
+    assert.equal((page.match(/<h1\b/g) ?? []).length, 1);
+    assert.match(page, new RegExp(`rel="canonical" href="https:\/\/www\\.locoboticsai\\.in\/${canonical}"`));
+    assert.match(page, /"@type": "BreadcrumbList"/);
+    assert.match(page, /"@type": "FAQPage"/);
+    const structuredData = page.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)?.[1];
+    assert.ok(structuredData);
+    assert.doesNotThrow(() => JSON.parse(structuredData));
+    const cspHash = createHash('sha256').update(structuredData).digest('base64');
+    assert.match(vercel, new RegExp(`sha256-${cspHash.replace(/[+/?=]/g, '\\$&')}`));
+    assert.match(page, /data-inquiry-open/);
+  }
+  assert.match(html, /href="\/whatsapp-orchestration-vs-chatbot"/);
+  assert.match(html, /href="\/relayvo-customer-onboarding"/);
+  assert.match(relayvo, /href="\/whatsapp-orchestration-vs-chatbot"/);
+  assert.match(relayvo, /href="\/relayvo-customer-onboarding"/);
+});
+
 test('crawl files use the verified www canonical host', () => {
   assert.match(robots, /Sitemap: https:\/\/www\.locoboticsai\.in\/sitemap\.xml/);
   assert.match(sitemap, /<loc>https:\/\/www\.locoboticsai\.in\/<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/www\.locoboticsai\.in\/relayvo<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/www\.locoboticsai\.in\/whatsapp-orchestration-vs-chatbot<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/www\.locoboticsai\.in\/relayvo-customer-onboarding<\/loc>/);
   assert.doesNotMatch(sitemap, /https:\/\/locoboticsai\.in/);
 });
 
@@ -99,7 +128,7 @@ test('legal pages are linked, canonical and excluded from indexing', () => {
 });
 
 test('production build includes every SEO asset', () => {
-  for (const file of ['relayvo.html', 'privacy.html', 'terms.html', 'logo-512.png', 'og-image.png', 'robots.txt', 'sitemap.xml']) {
+  for (const file of ['relayvo.html', 'whatsapp-orchestration-vs-chatbot.html', 'relayvo-customer-onboarding.html', 'privacy.html', 'terms.html', 'logo-512.png', 'og-image.png', 'robots.txt', 'sitemap.xml']) {
     assert.match(build, new RegExp(`['"]${file.replace('.', '\\.') }['"]`));
   }
   assert.equal(ogImage.readUInt32BE(16), 1200);
